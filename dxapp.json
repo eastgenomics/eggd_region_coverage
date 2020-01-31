@@ -6,32 +6,34 @@
   "version": "0.0.1",
   "inputSpec": [
     {
-      "name": "b",
+      "name": "input_bam",
       "label": "bam",
       "class": "file",
       "optional": false,
-      "patterns": [
-        "*"
-      ],
-      "help": ""
+      "patterns": ["*.bam"],
+      "help": "Input bam file"
     },
     {
-      "name": "B",
+      "name": "input_bed",
       "label": "bed",
       "class": "file",
       "optional": false,
-      "patterns": [
-        "*"
-      ],
-      "help": ""
+      "patterns": ["*.bed"],
+      "help": "Input targets bed file",
+      "suggestions": [
+        {"name": "References", "project": "project-Fjj60Qj4yBGvQXbb5Z6FXkgF", "path": "/data/references"},
+        {
+          "name": "TruSight One Capture bed",
+          "value": {"$dnanexus_link":{"project":"project-Fjj60Qj4yBGvQXbb5Z6FXkgF","id":"file-FjkQQJQ4yBGbVGkjK7j78BvZ"}}}
+        ]
     },
     {
-      "name": "f",
+      "name": "flank",
       "label": "flank",
       "class": "int",
       "optional": true,
       "default": 5,
-      "help": ""
+      "help": "Number of bases to be looked at adjacnet to the 5',3' ends, default is 5."
     },
     {
       "name": "F",
@@ -44,7 +46,7 @@
   ],
   "outputSpec": [
     {
-      "name": "o",
+      "name": "coverage_output",
       "label": "outfile",
       "class": "file",
       "patterns": [
@@ -54,7 +56,14 @@
     }
   ],
   "runSpec": {
-    "timeoutPolicy": {
+    "execDepends": [
+      {
+        "name": "pysam",
+        "package_manager": "pip",
+        "version": "0.7.5"
+      }
+    ],
+  "timeoutPolicy": {
       "*": {
         "hours": 1
       }
@@ -64,6 +73,13 @@
     "distribution": "Ubuntu",
     "file": "src/dnanexus_region_coverage.sh"
   },
+    "access": {
+      "project": "CONTRIBUTE",
+      "allProjects": "VIEW",
+      "network": [
+        "*"
+      ]
+    },
   "regionalOptions": {
     "aws:us-east-1": {
       "systemRequirements": {

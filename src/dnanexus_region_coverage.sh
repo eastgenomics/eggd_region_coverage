@@ -29,7 +29,8 @@ main() {
     # recover the original filenames, you can use the output of "dx describe
     # "$variable" --name".
 
-    mark-section "streaming input data"
+
+    echo "streaming input data"
 
     dx download "$input_bam" -o b
 
@@ -40,7 +41,30 @@ main() {
     mkdir -p coverage_stats
     cd coverage_stats
 
-    mark-section "Running coverage calculations"
+    echo "installing dependencies"
+
+    cd /dependencies
+    tar -zxvf Cython-0.26.1.tar.gz
+    tar -zxvf htslib-1.7.tar.gz
+    tar -zxvf pysam-0.7.6.tar.gz
+
+    cd Cython-0.26.1
+    python2 setup.py install
+
+    cd ../htslib-1.7
+    autoheader
+    autoconf
+    ./configure
+    make
+    make install
+
+    cd ../pysam-0.7.6
+
+    python2 setup.py install
+
+    cd
+
+    echo "Running coverage calculations"
 
     python2 region_coverage.py -F -f $flank -b $input_bam -B $input_bed -o $coverage_output
 
@@ -62,7 +86,7 @@ main() {
     # but you can change that behavior to suit your needs.  Run "dx upload -h"
     # to see more options to set metadata.
 
-    mark-section "uploading results"
+    echo "uploading results"
 
     o=$(dx upload o --brief)
 
@@ -73,5 +97,5 @@ main() {
 
     dx-jobutil-add-output o "$coverage_output" --class=file
 
-    mark success
+
 }

@@ -14,6 +14,14 @@
       "help": "Input bam file"
     },
     {
+      "name": "bam_index",
+      "label": "bam",
+      "class": "file",
+      "optional": false,
+      "patterns": ["*.bai"],
+      "help": "Input bam file"
+    },
+    {
       "name": "input_bed",
       "label": "bed",
       "class": "file",
@@ -50,7 +58,16 @@
       "label": "outfile",
       "class": "file",
       "patterns": [
-        "*"
+        "*.gz"
+      ],
+      "help": ""
+    },
+    {
+      "name": "coverage_index",
+      "label": "tbi_index",
+      "class": "file",
+      "patterns": [
+        "*.tbi"
       ],
       "help": ""
     }

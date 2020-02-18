@@ -86,6 +86,6 @@ main() {
     dx-jobutil-add-output coverage_output "$coverage_output" --class=file
     dx-jobutil-add-output coverage_index "$coverage_index" --class=file
 
-
+    echo "done"
 
 }

@@ -20,6 +20,7 @@ set -e -x -o pipefail
 main() {
 
     echo "Value of input_bam: '$input_bam'"
+    echo "Value of bam_index: '$bam_index'"
     echo "Value of input_bed: '$input_bed'"
     echo "Value of flank: '$flank'"
     echo "Value of F: '$F'"
@@ -29,20 +30,30 @@ main() {
     # recover the original filenames, you can use the output of "dx describe
     # "$variable" --name".
 
-    mark-section "streaming input data"
 
-    dx download "$input_bam" -o b
+    echo "streaming input data"
 
-    dx download "$input_bed" -o B
+    dx download "$input_bam" -o input_bam
+    dx download "$bam_index" -o input_bam.bai
+    dx download "$input_bed" -o input_bed
 
     # Fill in your application code here.
 
-    mkdir -p coverage_stats
-    cd coverage_stats
 
-    mark-section "Running coverage calculations"
+    echo "installing dependencies"
 
-    python2 region_coverage.py -F -f $flank -b $input_bam -B $input_bed -o $coverage_output
+    pip install --upgrade pip
+    pip install pysam==0.7.6
+
+    echo "Running coverage calculations"
+
+    #mkdir -p coverage_stats
+    #cd coverage_stats
+
+    sample_output=${input_bam_prefix}.nirvana_203_5bp
+
+    region_coverage.py -F -f $flank -b input_bam -B input_bed -o $sample_output
+
 
     # To report any recognized errors in the correct format in
     # $HOME/job_error.json and exit this script, you can use the
@@ -62,16 +73,19 @@ main() {
     # but you can change that behavior to suit your needs.  Run "dx upload -h"
     # to see more options to set metadata.
 
-    mark-section "uploading results"
+    echo "uploading results"
 
-    o=$(dx upload o --brief)
+    coverage_output=$(dx upload ${sample_output}.gz --brief)
+    coverage_index=$(dx upload ${sample_output}.gz.tbi --brief)
 
     # The following line(s) use the utility dx-jobutil-add-output to format and
     # add output variables to your job's output as appropriate for the output
     # class.  Run "dx-jobutil-add-output -h" for more information on what it
     # does.
 
-    dx-jobutil-add-output o "$coverage_output" --class=file
+    dx-jobutil-add-output coverage_output "$coverage_output" --class=file
+    dx-jobutil-add-output coverage_index "$coverage_index" --class=file
 
-    mark success
+    echo "done"
+
 }

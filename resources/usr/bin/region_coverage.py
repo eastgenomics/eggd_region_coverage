@@ -1,12 +1,10 @@
 #!/usr/bin/python2
-import sys
-import getopt
+
 import pprint
 import os
 import argparse
 pp = pprint.PrettyPrinter(indent=4)
 
-#sys.path.append('/software/lib/python2.7/site-packages/pysam-0.7.5-py2.7-linux-x86_64.egg/')
 import pysam
 
 BIN_0_MIN  = -10

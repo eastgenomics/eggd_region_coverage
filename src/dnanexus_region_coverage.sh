@@ -50,7 +50,8 @@ main() {
     #mkdir -p coverage_stats
     #cd coverage_stats
 
-    sample_output=${input_bam_prefix}.nirvana_203_5bp
+    # needs making dynamic before next change of bed files
+    sample_output=${input_bam_prefix}.nirvana_2010_5bp
 
     region_coverage.py -F -f $flank -b input_bam -B input_bed -o $sample_output
 

@@ -43,7 +43,7 @@
       "label": "flank",
       "class": "int",
       "optional": true,
-      "default": 5,
+      "default": 0,
       "help": "Number of bases to be looked at adjacnet to the 5',3' ends, default is 5."
     },
     {

@@ -1,6 +1,6 @@
 {
-  "name": "region_coverage_v.1.0.2",
-  "title": "region_coverage_v.1.0.2",
+  "name": "region_coverage_v1.0.3",
+  "title": "region_coverage_v1.0.3",
   "summary": "Calculates the regions covered in a sample.",
   "dxapi": "1.0.0",
   "tags":["Coverage"],
@@ -18,11 +18,11 @@
     },
     {
       "name": "bam_index",
-      "label": "bam",
+      "label": "bai",
       "class": "file",
       "optional": false,
       "patterns": ["*.bai"],
-      "help": "Input bam file"
+      "help": "Input bam index file"
     },
     {
       "name": "input_bed",
@@ -30,13 +30,21 @@
       "class": "file",
       "optional": false,
       "patterns": ["*.bed"],
-      "help": "Input targets bed file",
+      "help": "Input target bed file",
       "suggestions": [
-        {"name": "References", "project": "project-Fjj60Qj4yBGvQXbb5Z6FXkgF", "path": "/data/references"},
+        {"name": "Reference bed files", "project": "project-Fkb6Gkj433GVVvj73J7x8KbV", "path": "/data/bed_files"},
         {
           "name": "TruSight One Capture bed",
-          "value": {"$dnanexus_link":{"project":"project-Fjj60Qj4yBGvQXbb5Z6FXkgF","id":"file-FjkQQJQ4yBGbVGkjK7j78BvZ"}}}
+          "value": {"$dnanexus_link":{"project":"project-Fkb6Gkj433GVVvj73J7x8KbV","id":"file-Fpz2X0Q433GVK5xxPvzqvVPB"}}}
         ]
+    },
+    {
+      "name": "suffix",
+      "label": "suffix",
+      "class": "string",
+      "optional": true,
+      "default": "nirvana_2010_5bp",
+      "help": "Nirvana annotation version, eg 'nirvana_2010_5bp'"
     },
     {
       "name": "flank",
@@ -44,7 +52,7 @@
       "class": "int",
       "optional": true,
       "default": 0,
-      "help": "Number of bases to be looked at adjacnet to the 5',3' ends, default is 5."
+      "help": "Number of bases to be looked at adjacent to the 5',3' ends, default is 5."
     },
     {
       "name": "F",

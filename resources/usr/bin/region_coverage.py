@@ -117,7 +117,7 @@ if __name__ == "__main__":
     # This should really be read in in bulk and sorted by the program.
     for entry in bedfile_fh.readlines():
       entry = entry.rstrip()
-      (region_chrom, region_start, region_end, region_region_id) = entry.split("\t")
+      (region_chrom, region_start, region_end, region_region_id) = entry.split("\t")[0:4]
       # This is now expecting a real bedfile BED. so add one to
       # the start as it is 0 based, and the end is non-inclusive in
       # the specification.

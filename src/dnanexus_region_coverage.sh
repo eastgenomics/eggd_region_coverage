@@ -22,7 +22,7 @@ main() {
     echo "Value of input_bam: '$input_bam'"
     echo "Value of bam_index: '$bam_index'"
     echo "Value of input_bed: '$input_bed'"
-    echo "Value of input_bed: '$suffix'"
+    echo "Value of bed_suffix: '$suffix'"
     echo "Value of flank: '$flank'"
     echo "Value of F: '$F'"
 
@@ -40,17 +40,11 @@ main() {
     # Fill in your application code here.
     echo "installing dependencies"
 
-    pip install --upgrade pip==20.3.3
-    pip install pysam-0.7.6.tar.gz #pysam==0.7.6
+    pip install pip-20.3.3.tar.gz
+    pip install pysam-0.7.6.tar.gz
 
     echo "running coverage calculations"
-
-    #mkdir -p coverage_stats
-    #cd coverage_stats
-
-    # needs making dynamic before next change of bed files
     sample_output=${input_bam_prefix}.$suffix
-
     region_coverage.py -F -f $flank -b input_bam -B input_bed -o $sample_output
 
     echo "uploading results"

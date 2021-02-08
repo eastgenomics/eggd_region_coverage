@@ -22,7 +22,6 @@ main() {
     echo "Value of input_bam: '$input_bam'"
     echo "Value of bam_index: '$bam_index'"
     echo "Value of input_bed: '$input_bed'"
-    echo "Value of bed_suffix: '$suffix'"
     echo "Value of flank: '$flank'"
     echo "Value of F: '$F'"
 
@@ -44,6 +43,9 @@ main() {
     pip install pysam-0.7.6.tar.gz
 
     echo "running coverage calculations"
+    bed_suffix=$(echo $input_bed | sed -e 's/.bed//')
+    suffix=$(echo $bed_suffix | sed -e 's/refseq_//')
+
     sample_output=${input_bam_prefix}.$suffix
     region_coverage.py -F -f $flank -b input_bam -B input_bed -o $sample_output
 

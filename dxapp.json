@@ -39,14 +39,6 @@
         ]
     },
     {
-      "name": "suffix",
-      "label": "suffix",
-      "class": "string",
-      "optional": true,
-      "default": "nirvana_2010_5bp",
-      "help": "Nirvana annotation version, eg 'nirvana_2010_5bp'"
-    },
-    {
       "name": "flank",
       "label": "flank",
       "class": "int",

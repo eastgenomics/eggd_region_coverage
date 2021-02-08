@@ -18,7 +18,6 @@ To visualise QC reports, this app should be run at the end of an NGS pipeline, w
 * bed file with regions of interest (0-based bed, no headers, chromosome column only contains chrom number)
 
 Optional inputs:
-* suffix (string) to change output filename (currently defaults to nirvana_2010_5bp)
 * flank (int) number of bases to be looked at adjacent to the 5', 3' ends
 * F (true/FALSE) whether to force overwrite output files of the same name
 

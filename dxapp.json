@@ -1,11 +1,11 @@
 {
-  "name": "region_coverage_v1.0.4",
-  "title": "region_coverage_v1.0.4",
+  "name": "region_coverage_v1.0.5",
+  "title": "region_coverage_v1.0.5",
   "summary": "Calculates the regions covered in a sample.",
   "dxapi": "1.0.0",
   "tags":["Coverage"],
   "properties": {
-    "githubRelease":"v1.0.4"
+    "githubRelease":"v1.0.5"
   },
   "inputSpec": [
     {
